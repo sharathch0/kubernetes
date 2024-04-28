@@ -1,0 +1,8 @@
+1) to create docker secure network 
+
+ -----> docker run -d --name (name of the container) --network=secure-network nginx:latest
+2)command to login docker container
+
+------> docker exec -it <container_id_or_name> /bin/bash
+
+

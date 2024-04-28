@@ -1,0 +1,86 @@
+Create instance:
+	attach IAM role to that instance(admin full prev role has to be created in IAM Role)
+	
+
+EKSCTL:	
+
+	curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+
+
+	sudo mv /tmp/eksctl /usr/local/bin 
+
+	eksctl version
+
+	KUBECTL:
+
+   curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+   chmod +x kubectl
+
+   mkdir -p ~/.local/bin
+
+   mv ./kubectl ~/.local/bin/kubectl
+
+  kubectl version
+
+	AWS-CLI:
+
+  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+
+  unzip awscliv2.zip
+
+  sudo ./aws/install
+
+  aws --version
+
+  eksctl create cluster --name my-eks-cluster --nodegroup-name my-worker-node --node-type t2.micro --nodes 3 --managed --region us-west-2
+
+============================================================================================================================================================================================================================
+
+eksctl create cluster -f cluster.yaml
+
+
+eksctl create cluster --name my-eks-cluster --nodegroup-name my-worker-node --node-type t2.medium --nodes 2 --managed --region us-east-1
+
+
+eksctl delete cluster --name my-eks-cluster --region us-east-1
+
+dcss
+
+eksctl get nodegroup --name $EKS_DEFAULT_MNG_NAME --cluster $EKS_CLUSTER_NAME
+
+
+eksctl scale nodegroup --name eks-ng --cluster basic-cluster --nodes 3 --nodes-min 3 --nodes-max 6 --region us-east-1
+
+
+============================================================================================================================================================================================================================
+
+
+Reference:
+https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html
+
+Open cloudshell
+
+# Type on your AWS CLI window 
+aws sts get-caller-identity
+# observe your account and user id details
+
+# Create a  kubeconfig file where it stores the credentials for EKS:
+# kubeconfig configuration allows you to connect to your cluster using the kubectl command line.
+aws eks update-kubeconfig --region region-code --name my-cluster
+ex: aws eks update-kubeconfig --region us-east-1 --name unus-eks-cluster-1 # Use the cluster name you just 
+created
+
+
+# see if you can get the nodes you created
+kubectl get nodes
+
+# Install nano editor in cloudshell. We will need this in the next task
+sudo yum install nano -y
+
+
+
+
+
+
+
